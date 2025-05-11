@@ -7,6 +7,7 @@ import { BASE_URL } from "../utils/server";
 const API_URL = `${BASE_URL}/api/careers`;
 
 const Careers = () => {
+  console.log({API_BASE_URL: import.meta.env.VITE_API_BASE_URL});
   const [careers, setCareers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");

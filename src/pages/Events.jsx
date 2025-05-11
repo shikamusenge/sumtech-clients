@@ -6,7 +6,7 @@ import { Calendar, Clock, MapPin, Youtube, Search, X, ArrowRight } from "lucide-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "../styles/Events.css";
+import "../styles/events.css";
 import { BASE_URL } from "../utils/server";
 
 const API_URL = `${BASE_URL}/api/events`;
