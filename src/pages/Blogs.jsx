@@ -4,7 +4,7 @@ import axios from "axios";
 import { ArrowRight, FileText, User, Calendar, X } from "lucide-react";
 import "../styles/Blogs.css";
 
-const API_URL = "http://localhost:5000/api/blogs";
+const API_URL = `${BASE_URL}/api/blogs`;
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
