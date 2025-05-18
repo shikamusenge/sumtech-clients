@@ -17,6 +17,21 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+/* Add to your global CSS */
+a, button {
+  transition: all 0.2s ease;
+}
+
+/* Animation for 404 text */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.text-404 {
+  animation: float 3s ease-in-out infinite;
+}
 
 @keyframes logo-spin {
   from {

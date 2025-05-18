@@ -9,6 +9,7 @@ import Careers from "./pages/Careers";
 import Portfolio from "./pages/Portfolio";
 import Shop from "./pages/Shop";
 import Blogs from "./pages/Blogs";
+import NotFound from "./pages/NotFound";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -16,11 +17,13 @@ import Profile from "./pages/Profile";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import ProtectedRoute from "./components/ProtectedRoute";
 
+
 function App() {
   return (
     <AuthProvider>
       <Router>
         <Navbar />
+        <div style={{minHeight:"100vh"}}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
@@ -36,8 +39,10 @@ function App() {
             <ProtectedRoute>
               <Profile />
             </ProtectedRoute>
-          } />
+           } />
+           <Route path="*" element={<NotFound />} />
         </Routes>
+        </div>
         <Footer />
       </Router>
     </AuthProvider>
