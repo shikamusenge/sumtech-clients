@@ -1,93 +1,125 @@
 import React from "react";
 import { MapPin, Mail, Phone, Clock, Linkedin, Twitter, Facebook, Instagram, Github } from "lucide-react";
+import { NavLink } from "react-router-dom";
 import "../styles/Footer.css";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="samtech-footer">
-      {/* Main Footer Content */}
+      <div className="footer-wave">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="#f8b400"></path>
+          <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="#f8b400"></path>
+          <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#f8b400"></path>
+        </svg>
+      </div>
+
       <div className="footer-main">
         <div className="container">
           <div className="footer-grid">
             {/* Company Info */}
             <div className="footer-col company-info">
-              <h3 className="footer-heading">SamTech Group</h3>
+              <div className="footer-logo">
+                <span className="logo-text">SamTech Group</span>
+              </div>
+              <p className="company-description">
+                Innovating technology solutions for a smarter future.
+              </p>
               <div className="footer-contact">
                 <div className="contact-item">
-                  <MapPin className="contact-icon" size={16} />
-                  <span>Ngoma-Kibungo</span>
+                  <MapPin className="contact-icon" size={18} />
+                  <span>Ngoma-Kibungo, Rwanda</span>
                 </div>
                 <div className="contact-item">
-                  <Mail className="contact-icon" size={16} />
-                  <span>info@samtechgrp.co.ke</span>
+                  <Mail className="contact-icon" size={18} />
+                  <a href="mailto:info@samtechgrp.co.ke">info@samtechgrp.co.ke</a>
                 </div>
                 <div className="contact-item">
-                  <Phone className="contact-icon" size={16} />
-                  <span>+250 781599881</span>
+                  <Phone className="contact-icon" size={18} />
+                  <a href="tel:+250781599881">+250 781 599 881</a>
+                </div>
+                <div className="contact-item">
+                  <Clock className="contact-icon" size={18} />
+                  <span>Mon-Fri: 8:00 AM - 5:00 PM</span>
                 </div>
               </div>
             </div>
 
             {/* Quick Links */}
             <div className="footer-col">
-              <h3 className="footer-heading">Links</h3>
+              <h3 className="footer-heading">Quick Links</h3>
               <ul className="footer-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/services">Services</a></li>
-                <li><a href="/careers">Careers</a></li>
-                <li><a href="/contact">Contact</a></li>
+                <li><NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink></li>
+                <li><NavLink to="/services" className={({ isActive }) => isActive ? "active" : ""}>Services</NavLink></li>
+                <li><NavLink to="/about" className={({ isActive }) => isActive ? "active" : ""}>About Us</NavLink></li>
+                <li><NavLink to="/careers" className={({ isActive }) => isActive ? "active" : ""}>Careers</NavLink></li>
+                <li><NavLink to="/contact" className={({ isActive }) => isActive ? "active" : ""}>Contact</NavLink></li>
               </ul>
             </div>
 
-            {/* Services Provided */}
+            {/* Services */}
             <div className="footer-col">
-              <h3 className="footer-heading">Services</h3>
+              <h3 className="footer-heading">Our Services</h3>
               <ul className="footer-links">
-                <li><a href="/web-development">Web Development</a></li>
-                <li><a href="/mobile-apps">Mobile Applications</a></li>
-                <li><a href="/cloud-solutions">Cloud Solutions</a></li>
-                <li><a href="/it-consulting">IT Consulting</a></li>
+                <li><NavLink to="/web-development">Web Development</NavLink></li>
+                <li><NavLink to="/mobile-apps">Mobile Applications</NavLink></li>
+                <li><NavLink to="/cloud-solutions">Cloud Solutions</NavLink></li>
+                <li><NavLink to="/it-consulting">IT Consulting</NavLink></li>
+                <li><NavLink to="/digital-marketing">Digital Marketing</NavLink></li>
               </ul>
             </div>
 
-            {/* Developers
-            <div className="footer-col">
-              <h3 className="footer-heading">Developers</h3>
-              <div className="developer-info">
-                <p>Built with React & Node.js</p>
-                <div className="developer-contact">
-                  <div className="contact-item">
-                    <Phone size={16} className="contact-icon" />
-                    <span>0782605270</span>
-                  </div>
-                  <div className="contact-item">
-                    <Mail size={16} className="contact-icon" />
-                    <span>nshutiprophetelisa@gmail.com</span>
-                  </div>
-                </div>
-                <div className="social-links">
-                  <a href="https://github.com/NSHUT28" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
-                    <Github size={18} />
-                  </a>
-                  <a href="https://www.linkedin.com/in/nshuti-prophet-elisa-b92270361/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-                    <Linkedin size={18} />
-                  </a>
-                </div>
+            {/* Newsletter */}
+            <div className="footer-col newsletter">
+              <h3 className="footer-heading">Newsletter</h3>
+              <p className="newsletter-text">
+                Subscribe to our newsletter for the latest updates and offers.
+              </p>
+              <form className="newsletter-form">
+                <input 
+                  type="email" 
+                  placeholder="Your email address" 
+                  required 
+                  className="newsletter-input"
+                />
+                <button type="submit" className="newsletter-button">
+                  Subscribe
+                </button>
+              </form>
+              <div className="social-links">
+                <a href="#" aria-label="LinkedIn" className="social-link">
+                  <Linkedin size={20} />
+                </a>
+                <a href="#" aria-label="Twitter" className="social-link">
+                  <Twitter size={20} />
+                </a>
+                <a href="#" aria-label="Facebook" className="social-link">
+                  <Facebook size={20} />
+                </a>
+                <a href="#" aria-label="Instagram" className="social-link">
+                  <Instagram size={20} />
+                </a>
+                <a href="#" aria-label="GitHub" className="social-link">
+                  <Github size={20} />
+                </a>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Footer Bottom */}
       <div className="footer-bottom">
         <div className="container">
           <div className="footer-bottom-content">
-            <p>&copy; {new Date().getFullYear()} SamTech Group. All rights reserved.</p>
-            <div className="social-links">
-              <a href="#" aria-label="Twitter"><Twitter size={16} /></a>
-              <a href="#" aria-label="Facebook"><Facebook size={16} /></a>
-              <a href="#" aria-label="Instagram"><Instagram size={16} /></a>
+            <div className="copyright">
+              &copy; {currentYear} SamTech Group. All rights reserved.
+            </div>
+            <div className="legal-links">
+              <NavLink to="/privacy-policy">Privacy Policy</NavLink>
+              <NavLink to="/terms-of-service">Terms of Service</NavLink>
+              <NavLink to="/cookies-policy">Cookies Policy</NavLink>
             </div>
           </div>
         </div>

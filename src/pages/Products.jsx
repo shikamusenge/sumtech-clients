@@ -107,8 +107,8 @@ function Products() {
   </section>
 
   {/* CTA Section */}
-  <section className="products-cta-section">
-    <div className="products-container">
+  <section className="products-cta-section" style={{minHeight:"100vh"}}>
+    <div className="products-container" style={{minHeight:"100vh"}}>
       <div className="products-cta-content">
         <h2>Need Custom Solutions?</h2>
         <p>
