@@ -208,7 +208,7 @@ const Events = () => {
                           <SwiperSlide key={index}>
                             <div className="swiper-image-container">
                               <img 
-                                src={`http://localhost:5000${image}`} 
+                                src={`${BASE_URL}${image}`} 
                                 alt={`${event.title} ${index + 1}`}
                                 className="swiper-image"
                               />
