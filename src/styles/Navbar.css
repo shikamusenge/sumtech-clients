@@ -55,6 +55,9 @@
   padding: 5px 0;
   position: relative;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
 }
 
 .nav-links li a:hover {
@@ -87,6 +90,10 @@
   cursor: pointer;
   padding: 5px 0;
   font-family: inherit;
+  display: flex; /* For icon alignment */
+  align-items: center; /* For icon alignment */
+  gap: 8px; /* Space between icon and text */
+  transition: color 0.3s ease; /* Added transition */
 }
 
 .nav-logout:hover {
@@ -207,10 +214,16 @@
   padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
+  gap: 8px; /* Space between icon and text */
 }
 
-.dropdown-arrow {
-  margin-left: 5px;
+.dropdown-arrow-icon { /* Replaces .dropdown-arrow */
+  margin-left: auto; /* Pushes arrow to the right if needed, or handled by gap */
+  transition: transform 0.3s ease;
+}
+
+.dropdown-toggle.active .dropdown-arrow-icon {
+  transform: rotate(180deg);
 }
 
 .dropdown-menu {
@@ -235,7 +248,9 @@
 }
 
 .dropdown-menu a, .dropdown-menu button {
-  display: block;
+  display: flex; /* For icon alignment */
+  align-items: center; /* For icon alignment */
+  gap: 8px; /* Space between icon and text */
   padding: 0.5rem 1rem;
   text-decoration: none;
   color: #333;
@@ -244,10 +259,12 @@
   background: none;
   border: none;
   cursor: pointer;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; /* Added transition */
 }
 
 .dropdown-menu a:hover, .dropdown-menu button:hover {
   background-color: #222121;
+  color: #61dafb; /* Ensure text color changes on hover too */
 }
 
 /* Mobile dropdown styles */

@@ -175,7 +175,7 @@ const Home = () => {
                   <p className="text-gray-600 dark:text-gray-300 mb-4">{service.description}</p>
                   <a
                     href={`/services/${service.id}`}
-                    className="group inline-flex items-center text-blue-600 dark:text-yellow-400 font-medium"
+                    className="group inline-flex items-center text-blue-600 dark:text-yellow-400 font-medium transition-colors duration-200 ease-in-out"
                   >
                     Learn More
                     <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />

@@ -15,15 +15,32 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Profile from "./pages/Profile";
 import { AuthProvider } from "./context/AuthContext.jsx";
+import { ThemeProvider } from "./context/ThemeContext.jsx"; // Import ThemeProvider
 import ProtectedRoute from "./components/ProtectedRoute";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+// Hypothetical AdminDashboard component
+const AdminDashboard = () => <div style={{padding: "20px"}}><h2>Admin Dashboard</h2><p>This page is only accessible to users with the 'admin' role.</p></div>;
 
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Navbar />
-        <div style={{minHeight:"100vh"}}>
+      <ThemeProvider> {/* Wrap Router with ThemeProvider */}
+        <Router>
+          <Navbar />
+          <div style={{minHeight:"100vh"}}>
+        <ToastContainer 
+          autoClose={3000} 
+          hideProgressBar={false} 
+          newestOnTop={true} 
+          closeOnClick 
+          rtl={false} 
+          pauseOnFocusLoss 
+          draggable 
+          pauseOnHover 
+          theme="colored" 
+        />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
@@ -40,6 +57,11 @@ function App() {
               <Profile />
             </ProtectedRoute>
            } />
+          <Route path="/admin-dashboard" element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <AdminDashboard />
+            </ProtectedRoute>
+          } />
            <Route path="*" element={<NotFound />} />
         </Routes>
         </div>

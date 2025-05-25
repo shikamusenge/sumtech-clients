@@ -1,272 +1,33 @@
-.products-page {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #e0e0e0;
-  line-height: 1.6;
-  background-color: #121212;
-}
+/* Products.css */
 
+/* Kept for the complex hero background gradient. 
+   All other layout, typography, and component-specific styles 
+   have been migrated to Tailwind CSS classes in Products.jsx.
+*/
 .products-hero {
-  position: relative;
-  height: 60vh;
-  min-height: 500px;
-  background: url('/images/products-bg.jpg') no-repeat center center;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  color: white;
-  margin-top: -70px;
-  padding: 70px 0px 0px 0px;
+  /* The original background: url('/images/products-bg.jpg') was overridden by the gradient.
+     If the image is desired as a fallback or base, it needs to be handled appropriately.
+     For now, only the gradient is kept as it's the most complex part.
+  */
   background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+  /* Other properties like position, height, display, align-items, color, padding, margin-top
+     are now handled by Tailwind classes in Products.jsx.
+     Ensure these are correctly applied in the JSX.
+     Example: relative h-[60vh] min-h-[500px] flex items-center text-white -mt-[70px] pt-[70px]
+  */
 }
 
-.products-hero-content h1 {
-  font-size: 3.5rem;
-  margin-bottom: 20px;
-  line-height: 1.2;
-}
-
-.products-hero-content h1 span {
-  color: #f8b400;
-}
-
-.products-hero-subtitle {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
-  max-width: 600px;
-  opacity: 0.9;
-}
-
-.products-section {
-  padding: 80px 0;
-  background: #121212;
-}
-
-.products-container {
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.products-section-title {
-  font-size: 2rem;
-  color: #f8b400;
-  text-align: center;
-}
-
-.products-section-subtitle {
-  text-align: center;
-  margin-top: 10px;
-  color: #b0b0b0;
-}
-
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 30px;
-  margin-top: 50px;
-}
-
-.products-card {
-  background: #000000;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-  border-top: 4px solid #f8b400;
-}
-
-.products-card:hover {
-  transform: translateY(-10px);
-  background: #3a3a3a;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-}
-
-.products-image-container {
-  position: relative;
-  height: 200px;
-  overflow: hidden;
-}
-
-.products-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.products-card:hover .products-image {
-  transform: scale(1.05);
-}
-
-.products-icon {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: rgba(0, 0, 0, 0.7);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  color: #f8b400;
-}
-
-.products-content {
-  padding: 25px;
-}
-
-.products-content h3 {
-  font-size: 1.4rem;
-  margin-bottom: 15px;
-  color: #f8b400;
-}
-
-.products-content p {
-  color: #b0b0b0;
-  margin-bottom: 20px;
-  min-height: 60px;
-}
-
-.products-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 15px;
-}
-
-.products-price {
-  color: #f8b400;
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
-.products-link {
-  display: inline-flex;
-  align-items: center;
-  color: #f8b400;
-  font-weight: 600;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.products-link:hover {
-  color: #e6a200;
-}
-
-.products-link svg {
-  margin-left: 5px;
-  transition: transform 0.3s ease;
-}
-
-.products-link:hover svg {
-  transform: translateX(5px);
-}
-
-/* CTA Section */
-.products-cta-section {
-  padding: 80px 0;
-  background: linear-gradient(135deg, #1a1a1a, #121212);
-  color: white;
-  text-align: center;
-}
-
-.products-cta-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.products-cta-content h2 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-}
-
-.products-cta-content p {
-  font-size: 1.1rem;
-  margin-bottom: 40px;
-  opacity: 0.9;
-}
-
-.products-cta-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.products-cta-button {
-  padding: 12px 25px;
-  font-size: 1rem;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background 0.3s ease;
-}
-
-.products-cta-button.primary {
-  background-color: #f8b400;
-  color: #121212;
-}
-
-.products-cta-button.primary:hover {
-  background-color: #e6a200;
-}
-
-.products-cta-button.secondary {
-  border: 2px solid #f8b400;
-  color: #f8b400;
-}
-
-.products-cta-button.secondary:hover {
-  background-color: #2d2d2d;
-}
-
-/* Responsive */
-@media (max-width: 992px) {
-  .products-hero-content h1 {
-    font-size: 3rem;
-  }
-
-  .products-grid {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .products-hero {
-    height: auto;
-    padding: 120px 0 80px;
-    min-height: auto;
-  }
-
-  .products-hero-content h1 {
-    font-size: 2.5rem;
-  }
-
-  .products-section {
-    padding: 60px 0;
-  }
-
-  .products-cta-section {
-    padding: 60px 0;
-  }
-}
-
-@media (max-width: 576px) {
-  .products-hero-content h1 {
-    font-size: 2rem;
-  }
-
-  .products-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .products-cta-buttons {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .products-cta-content h2 {
-    font-size: 2rem;
-  }
-}
+/* 
+  Removed styles (examples, not exhaustive):
+  - .products-page (bg-background, text-foreground, etc. applied to root div in JSX)
+  - .products-hero-overlay (effect can be part of .products-hero or ::before)
+  - .products-container (replaced with container mx-auto px-4 etc.)
+  - .products-hero-content and its h1, p styles (replaced with Tailwind typography and spacing)
+  - .products-section and its title/subtitle (replaced with Tailwind layout, typography, spacing)
+  - .products-grid (replaced with Tailwind grid classes)
+  - .products-card and its hover effects, children like .products-image-container, .products-icon, 
+    .products-content, .products-footer, .products-price, .products-link 
+    (all replaced with Tailwind utilities and theme colors like bg-black, rounded-lg, shadow-lg, text-accent etc.)
+  - .products-cta-section and its children (replaced with Tailwind layout, typography, button styling)
+  - All responsive media queries (handled by Tailwind's sm:, md:, lg: prefixes)
+*/

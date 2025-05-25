@@ -1,11 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
+  /* Updated Light Theme Variables */
+  --background: #f9fafb;      /* gray-50 */
+  --foreground: #111827;      /* gray-900 */
+  --muted: #6b7280;           /* gray-500 */
+  --border: #e5e7eb;          /* gray-200 */
+  --primary: #2563eb;         /* blue-600 */
+  --primary-light: rgba(37, 99, 235, 0.1);
+  --primary-lighter: rgba(37, 99, 235, 0.05);
+  --accent: #2563eb;          /* blue-600 for light theme accent */
+  /* --accent-dark: #1d4ed8; blue-700 - This would be for Tailwind config, not CSS var */
+
+  /* Default Vite styles (reconciled) */
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color-scheme: light dark; /* Keep for browser UI adaptation */
+  color: var(--foreground); /* Use theme variable */
+  background-color: var(--background); /* Use theme variable */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,56 +29,107 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Dark mode variables from Home.css */
+/* Apply the 'dark' class to html or body to activate these */
+.dark {
+  /* Updated Dark Theme Variables */
+  --background: #111827;      /* gray-900 */
+  --foreground: #f9fafb;      /* gray-50 */
+  --muted: #9ca3af;           /* gray-400 */
+  --border: #374151;          /* gray-700 */
+  --primary: #60a5fa;         /* blue-400 (lighter blue for dark mode) */
+  --primary-light: rgba(96, 165, 250, 0.1);
+  --primary-lighter: rgba(96, 165, 250, 0.05);
+  --accent: #f8b400;          /* Previous yellow/orange for dark mode accent */
+  /* --accent-dark: #e6a200; for Tailwind config */
+}
+
+/* 
+  The @media (prefers-color-scheme: light) and @media (prefers-color-scheme: dark) blocks 
+  that were part of the default Vite setup are now less critical for base theme colors, 
+  as :root defines the default (light) and .dark class defines the dark theme explicitly.
+  However, they can still influence default browser UI elements if `color-scheme` is set.
+  And Vite's default button/link colors within them might still apply if not overridden by Tailwind utilities.
+  For a pure Tailwind + CSS variable approach, these media queries for :root color/background might be removed
+  or simplified if a JS-based theme toggle is implemented that adds/removes the .dark class.
+
+  For now, we ensure :root sets the light theme, and .dark sets the dark theme.
+  The Vite default styles for <a> and <button> within these media queries will apply if no
+  Tailwind utility classes override them on specific elements.
+*/
+
+@media (prefers-color-scheme: light) {
+  /* This block reinforces light theme defaults if no .dark class is present */
+  :root {
+    color: var(--foreground); /* Uses light theme foreground */
+    background-color: var(--background); /* Uses light theme background */
+  }
+  a:hover {
+    color: #3b82f6; /* A slightly darker blue for light theme link hover, was #747bff */
+  }
+  button {
+    /* Default light theme button, consider if Tailwind utilities should always override this */
+    /* background-color: #f0f0f0; /* Lighter gray, was #f9f9f9 */
+    /* border-color: #e0e0e0; */
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  /* This block provides OS-level dark mode defaults if .dark class is NOT applied */
+  /* If .dark class IS applied, its variables take precedence. */
+  :root:not(.dark) { /* Apply only if .dark class is not present */
+    color: #f8fafc; /* Default dark text, e.g., slate-50 */
+    background-color: #1e293b; /* Default dark background, e.g., slate-800 */
+  }
+  :root:not(.dark) a:hover {
+    color: #93c5fd; /* Lighter blue for dark theme link hover, was #535bf2 */
+  }
+  :root:not(.dark) button {
+    /* Default dark theme button if not using .dark class, consider Tailwind overrides */
+    /* background-color: #374151; /* Darker gray, was #1a1a1a */
+    /* border-color: #4b5563; */
+  }
+}
+
+
+/* General styles from original index.css, ensure they are compatible with theme variables */
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--primary); /* Use themed primary color for links */
   text-decoration: inherit;
 }
-a:hover {
-  color: #535bf2;
-}
+/* a:hover is handled by prefers-color-scheme blocks or Tailwind utilities */
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  color: var(--foreground); /* Ensure body text color uses theme variable */
+  background-color: var(--background); /* Ensure body background uses theme variable */
 }
 
-h1 {
-  font-size: 3.2em;
+h1 { /* Example, specific components should use Tailwind typography */
+  font-size: 2.5em; /* Adjusted from 3.2em for better balance */
   line-height: 1.1;
 }
 
-button {
+button { /* Base button, expect Tailwind to override for specific buttons */
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--primary); /* Use themed primary for default button bg */
+  color: var(--background); /* Text color that contrasts with primary */
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: background-color 0.25s, border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--primary); /* Use themed primary for hover border */
+  /* background-color: var(--primary-dark); /* Needs a --primary-dark variable */
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  outline: 4px auto -webkit-focus-ring-color; /* Keep for accessibility */
 }

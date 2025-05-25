@@ -1,10 +1,11 @@
 import React from "react";
 import { ArrowRight, ChevronRight } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "../styles/Products.css";
+// Swiper imports are not used in this refactored version, can be removed if not needed for other parts
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import { Navigation, Autoplay } from "swiper/modules";
+// import "swiper/css";
+// import "swiper/css/navigation";
+import "../styles/Products.css"; // Keep for hero gradient if not moved
 
 function Products() {
   const services = [
@@ -12,7 +13,7 @@ function Products() {
       id: 1,
       title: "Software Development",
       description: "We build web apps, mobile apps, and automation tools tailored to your business needs.",
-      image: "./system_images/software.jpg",
+      image: "./system_images/software.jpg", // Ensure these paths are correct relative to public directory or use import
       price: "Starting at $200",
       icon: "💻",
     },
@@ -59,74 +60,75 @@ function Products() {
   ];
 
   return (
-    <div className="products-page">
-  {/* Hero Section */}
-  <section className="products-hero">
-    <div className="products-hero-overlay"></div>
-    <div className="products-container">
-      <div className="products-hero-content">
-        <h1>
-          Our <span>Products & Services</span>
-        </h1>
-        <p className="products-hero-subtitle">
-          Comprehensive technology solutions designed to meet your business needs and drive growth
-        </p>
-      </div>
-    </div>
-  </section>
+    <div className="bg-background text-foreground font-sans leading-relaxed"> {/* Replaces .products-page */}
+      {/* Hero Section - Assuming .products-hero class in Products.css handles the gradient background */}
+      <section className="products-hero relative h-[60vh] min-h-[500px] flex items-center text-white -mt-[70px] pt-[70px]">
+        {/* products-hero-overlay is handled by the gradient in .products-hero or could be an ::before pseudo-element */}
+        <div className="container mx-auto px-4 w-11/12 max-w-6xl"> {/* Replaces .products-container */}
+          <div className="max-w-2xl"> {/* Replaces .products-hero-content implicitly by max-width */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-5 leading-tight">
+              Our <span className="text-accent">Products & Services</span>
+            </h1>
+            <p className="text-lg sm:text-xl mb-8 max-w-xl opacity-90">
+              Comprehensive technology solutions designed to meet your business needs and drive growth
+            </p>
+          </div>
+        </div>
+      </section>
 
-  {/* Services Grid */}
-  <section className="products-section">
-    <div className="products-container">
-      <h2 className="products-section-title">What We Offer</h2>
-      <p className="products-section-subtitle">
-        Professional services with transparent pricing to help you plan your technology investment
-      </p>
+      {/* Services Grid */}
+      <section className="py-16 md:py-20 bg-background"> {/* Replaces .products-section */}
+        <div className="container mx-auto px-4 w-11/12 max-w-6xl"> {/* Replaces .products-container */}
+          <h2 className="text-3xl md:text-4xl font-bold text-accent text-center mb-4">What We Offer</h2>
+          <p className="text-lg text-muted text-center mb-12 max-w-2xl mx-auto">
+            Professional services with transparent pricing to help you plan your technology investment
+          </p>
 
-      <div className="products-grid">
-        {services.map((service) => (
-          <div key={service.id} className="products-card">
-            <div className="products-image-container">
-              <img src={service.image} alt={service.title} className="products-image" />
-              <div className="products-icon">{service.icon}</div>
-            </div>
-            <div className="products-content">
-              <h3>{service.title}</h3>
-              <p>{service.description}</p>
-              <div className="products-footer">
-                <span className="products-price">{service.price}</span>
-                <a href={`/services/${service.id}`} className="products-link">
-                  Details <ChevronRight size={16} />
-                </a>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"> {/* Replaces .products-grid */}
+            {services.map((service) => (
+              <div key={service.id} className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl border-t-4 border-accent dark:border-accent"> {/* Card: light bg, dark bg */}
+                <div className="relative h-52 overflow-hidden"> {/* Replaces .products-image-container */}
+                  <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105" /> {/* Replaces .products-image, group-hover for card needed if not targeting card directly */}
+                  <div className="absolute top-4 right-4 bg-gray-100 dark:bg-gray-700 bg-opacity-80 dark:bg-opacity-70 w-12 h-12 rounded-full flex items-center justify-center text-2xl text-accent"> {/* Icon background */}
+                    {service.icon}
+                  </div>
+                </div>
+                <div className="p-6"> {/* Replaces .products-content */}
+                  <h3 className="text-xl font-semibold mb-3 text-accent">{service.title}</h3>
+                  <p className="text-muted mb-5 min-h-[60px]">{service.description}</p>
+                  <div className="flex justify-between items-center mt-4"> {/* Replaces .products-footer */}
+                    <span className="text-accent font-bold text-lg">{service.price}</span> {/* Replaces .products-price */}
+                    <a href={`/services/${service.id}`} className="inline-flex items-center text-accent font-semibold transition-colors duration-300 hover:text-accent-dark group"> {/* Replaces .products-link */}
+                      Details <ChevronRight size={18} className="ml-1 transition-transform duration-300 group-hover:translate-x-1" />
+                    </a>
+                  </div>
+                </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 md:py-20 bg-gradient-to-r from-gray-800 to-gray-900 text-white text-center min-h-[50vh] flex items-center justify-center"> {/* Replaces .products-cta-section style was minHeight:100vh */}
+        <div className="container mx-auto px-4 w-11/12 max-w-6xl"> {/* Replaces .products-container */}
+          <div className="max-w-3xl mx-auto"> {/* Replaces .products-cta-content */}
+            <h2 className="text-3xl sm:text-4xl font-bold mb-5">Need Custom Solutions?</h2>
+            <p className="text-lg sm:text-xl mb-10 opacity-90">
+              Contact us for personalized service packages tailored to your specific requirements.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-5"> {/* Replaces .products-cta-buttons */}
+              <a href="/contact" className="px-6 py-3 text-lg font-medium rounded-lg bg-accent text-background transition-colors duration-300 hover:bg-accent-dark inline-flex items-center justify-center group">
+                Get a Quote <ArrowRight size={20} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+              </a>
+              <a href="/services" className="px-6 py-3 text-lg font-medium rounded-lg border-2 border-accent text-accent transition-colors duration-300 hover:bg-accent hover:text-background inline-flex items-center justify-center">
+                All Services
+              </a>
             </div>
           </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  {/* CTA Section */}
-  <section className="products-cta-section" style={{minHeight:"100vh"}}>
-    <div className="products-container" style={{minHeight:"100vh"}}>
-      <div className="products-cta-content">
-        <h2>Need Custom Solutions?</h2>
-        <p>
-          Contact us for personalized service packages tailored to your specific requirements.
-        </p>
-        <div className="products-cta-buttons">
-          <a href="/contact" className="products-cta-button primary">
-            Get a Quote <ArrowRight size={18} />
-          </a>
-          <a href="/services" className="products-cta-button secondary">
-            All Services
-          </a>
         </div>
-      </div>
+      </section>
     </div>
-  </section>
-</div>
-
   );
 }
 
