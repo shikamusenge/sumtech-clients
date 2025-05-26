@@ -7,7 +7,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { toast } from 'react-toastify';
-import { GridLoader } from 'react-spinners'; // Import GridLoader
+import { GridLoader } from 'react-spinners';
+import { Heart, Eye } from 'lucide-react'; // Added Heart and Eye icons
 import "../styles/Shop.css";
 import { BASE_URL } from "../utils/server";
 
