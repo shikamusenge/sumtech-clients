@@ -1,11 +1,11 @@
 import React from "react";
-import { ArrowRight, ChevronRight, Mail, Phone, BarChart3, Shield, Clock, Star, ChevronDown, ArrowUpRight, Cpu, Globe, Server, Code, Database, Smartphone } from 'lucide-react';
+import { ArrowRight, ChevronRight, Mail, Phone, BarChart3, Shield, Clock, Star, ChevronDown, ArrowUpRight, Cpu, Globe, Server, Code, Database, Smartphone, Link } from 'lucide-react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "../styles/Home.css";
+// import "../styles/Home.css";
 
 const Home = () => {
   const services = [
@@ -101,8 +101,10 @@ const Home = () => {
                 <button className="inline-flex items-center justify-center px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-medium rounded-lg transition-all group">
                   Get Started <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </button>
+                
                 <button className="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-medium rounded-lg hover:bg-white hover:text-blue-900 transition-all">
-                  Our Services
+                <Link/>
+                      Our Services
                 </button>
               </div>
               <div className="flex items-center gap-6 mt-6">
@@ -154,7 +156,7 @@ const Home = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-16 md:py-24 bg-gray-50 dark:bg-gray-900">
+      <section className="py-16 md:py-24 bg-gray-50 dark:bg-gray-900" id="products">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
@@ -173,13 +175,6 @@ const Home = () => {
                   <div className="mb-4">{service.icon}</div>
                   <h3 className="text-xl font-bold mb-2">{service.title}</h3>
                   <p className="text-gray-600 dark:text-gray-300 mb-4">{service.description}</p>
-                  <a
-                    href={`/services/${service.id}`}
-                    className="group inline-flex items-center text-blue-600 dark:text-yellow-400 font-medium"
-                  >
-                    Learn More
-                    <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </a>
                 </div>
               </div>
             ))}
@@ -234,26 +229,6 @@ const Home = () => {
                 </SwiperSlide>
               ))}
             </Swiper>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-r from-blue-800 to-blue-600 text-white">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Business?</h2>
-            <p className="text-xl text-blue-100 mb-8">
-              Contact us today to discuss how SumTech can help with your technology needs.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="inline-flex items-center justify-center px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-medium rounded-lg transition-all group">
-                Get Started <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </button>
-              <button className="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-medium rounded-lg hover:bg-white hover:text-blue-900 transition-all gap-2">
-                <Phone className="h-4 w-4" /> Call Us Now
-              </button>
-            </div>
           </div>
         </div>
       </section>

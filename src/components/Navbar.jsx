@@ -67,7 +67,7 @@ function Navbar() {
       
       <ul className={`nav-links ${isMenuOpen ? 'mobile-menu-open' : ''}`}>
         <li><NavLink to="/" exact activeClassName="active" onClick={() => setIsMenuOpen(false)}>Home</NavLink></li>
-        <li><NavLink to="/products" activeClassName="active" onClick={() => setIsMenuOpen(false)}>Products</NavLink></li>
+        <li><NavLink to="/#products" activeClassName="active" onClick={() => setIsMenuOpen(false)}>Products</NavLink></li>
         <li><NavLink to="/shop" activeClassName="active" onClick={() => setIsMenuOpen(false)}>Shop</NavLink></li>
         <li><NavLink to="/contact" activeClassName="active" onClick={() => setIsMenuOpen(false)}>Contact</NavLink></li>
         
@@ -138,7 +138,7 @@ function Navbar() {
             >
               <span className="account-icon">👤</span>
               <span className="account-text">Account</span>
-              <span className="dropdown-arrow">&#9660;</span>
+              <span className="dropdown-arrow text-white">&#9660;</span>
             </button>
             <ul 
               className={`dropdown-menu ${activeDropdown === 'account' ? 'show' : ''}`}

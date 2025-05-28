@@ -81,7 +81,7 @@
 .nav-logout {
   background: none;
   border: none;
-  color: white;
+  color: white !important;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
@@ -211,6 +211,7 @@
 
 .dropdown-arrow {
   margin-left: 5px;
+  color: white !important;
 }
 
 .dropdown-menu {
