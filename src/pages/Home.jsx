@@ -52,7 +52,7 @@ const Home = () => {
       id: 2,
       name: "Sarah Mwangi",
       position: "Marketing Director, Digital Africa",
-      quote: "Our new website developed by SumTech has significantly increased our online conversions and customer engagement.",
+      quote: "Our new website developed by SamTech has significantly increased our online conversions and customer engagement.",
       avatar: "https://randomuser.me/api/portraits/women/44.jpg",
       rating: 5
     },
@@ -94,7 +94,7 @@ const Home = () => {
                 Innovative <span className="text-yellow-400">IT Solutions</span> for Your Business
               </h1>
               <p className="text-xl text-blue-100 max-w-[600px]">
-                SumTech provides cutting-edge technology services including IT consulting, web development, 
+                SamTech provides cutting-edge technology services including IT consulting, web development, 
                 and electronics repair to help your business thrive in the digital age.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mt-4">
