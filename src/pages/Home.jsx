@@ -5,7 +5,7 @@ import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-// import "../styles/Home.css";
+import Contacts from "./Contact";
 
 const Home = () => {
   const services = [
@@ -44,7 +44,7 @@ const Home = () => {
       id: 1,
       name: "James Kariuki",
       position: "CEO, Nairobi Tech Solutions",
-      quote: "SumTech transformed our IT infrastructure with their consulting services. Their team is professional and knowledgeable.",
+      quote: "SamTech transformed our IT infrastructure with their consulting services. Their team is professional and knowledgeable.",
       avatar: "https://randomuser.me/api/portraits/men/32.jpg",
       rating: 5
     },
@@ -67,8 +67,8 @@ const Home = () => {
   ];
 
   const stats = [
-    { value: "200+", label: "Satisfied Clients" },
-    { value: "15+", label: "Years Experience" },
+    { value: "20+", label: "Satisfied Clients" },
+    { value: "2+", label: "Years Experience" },
     { value: "98%", label: "Success Rate" },
     { value: "24/7", label: "Support Available" }
   ];
@@ -232,6 +232,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <Contacts/>
     </div>
   );
 };
