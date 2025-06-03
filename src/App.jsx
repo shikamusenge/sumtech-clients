@@ -23,7 +23,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Navbar />
-        <div style={{minHeight:"100vh"}}>
+        <div style={{minHeight:"100vh"}} className="mt-20">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
