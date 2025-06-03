@@ -14,7 +14,8 @@ export const AuthProvider = ({ children }) => {
 
   const checkSession = async () => {
     try {
-      const response = await SERVER.get(`/clients/api/user`, { withCredentials: true });
+      const response = await SERVER.get(`/clients/api/user`, { withCredentials: true },
+      );
       // const response = await axios.get(`${BASE_URL}/clients/api/user`, { withCredentials: true });
       setUser(response.data);
     } catch (err) {
@@ -33,7 +34,9 @@ export const AuthProvider = ({ children }) => {
   const login = async (credentials) => {
     const response = await SERVER.post(`/clients/api/login`, credentials, { withCredentials: true });
     // const response = await axios.post(`${BASE_URL}/clients/api/login`, credentials, { withCredentials: true });
+    localStorage.setItem('token',response.data.token);
     await checkSession();
+    
     return response.data;
   };
 
