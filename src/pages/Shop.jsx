@@ -60,8 +60,7 @@ function Shop() {
         setFilteredProducts(
           productsRes.data.filter((product) =>
             product.title.toLowerCase().includes(searchTerm.toLowerCase())
-          )
-        );
+        ))
       }
 
       // Fetch user data if logged in
@@ -253,10 +252,10 @@ function Shop() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-white">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
-          <p className="mt-4 text-lg font-medium text-gray-700">Loading products...</p>
+          <p className="mt-4 text-lg font-medium text-gray-700 animate-pulse">Loading products...</p>
         </div>
       </div>
     );
@@ -264,14 +263,14 @@ function Shop() {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center p-6 max-w-md bg-red-50 rounded-lg">
-          <HiOutlineExclamationCircle className="w-12 h-12 text-red-500 mx-auto" />
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-white">
+        <div className="text-center p-6 max-w-md bg-white rounded-xl shadow-lg transform transition-all hover:scale-[1.01]">
+          <HiOutlineExclamationCircle className="w-12 h-12 text-red-500 mx-auto animate-bounce" />
           <h2 className="mt-4 text-xl font-bold text-red-600">Error Loading Products</h2>
           <p className="mt-2 text-gray-600">{error}</p>
           <button 
             onClick={fetchAllData}
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all transform hover:-translate-y-0.5 shadow-md hover:shadow-lg"
           >
             Retry
           </button>
@@ -281,12 +280,14 @@ function Shop() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-10">
+      <header className="bg-white shadow-md sticky top-0 z-50 transform transition-all duration-300 hover:shadow-xl">
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <h1 className="text-2xl font-bold text-gray-800">Our Products</h1>
+            <h1 className="text-2xl font-bold text-gray-800 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400">
+              Our Products
+            </h1>
             
             <div className="relative flex-1 max-w-xl">
               <div className="relative">
@@ -298,11 +299,11 @@ function Shop() {
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onFocus={() => setShowSuggestions(true)}
                   onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                  className="w-full ml-10 pl-20 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all shadow-sm hover:shadow-md"
                 />
               </div>
               {showSuggestions && suggestions.length > 0 && (
-                <ul className="absolute z-20 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg">
+                <ul className="absolute z-20 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden">
                   {suggestions.map((suggestion, index) => (
                     <li
                       key={index}
@@ -310,7 +311,7 @@ function Shop() {
                         setSearchTerm(suggestion);
                         setShowSuggestions(false);
                       }}
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer transition-colors"
+                      className="px-4 py-2 hover:bg-blue-50 cursor-pointer transition-colors border-b border-gray-100 last:border-0"
                     >
                       {suggestion}
                     </li>
@@ -321,18 +322,18 @@ function Shop() {
             
             <div className="flex items-center gap-4">
               <button 
-                className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors"
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${showOrders ? 'bg-blue-100 text-blue-600' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'}`}
                 onClick={() => setShowOrders(!showOrders)}
               >
                 <span>My Orders</span>
               </button>
               <button 
-                className="relative p-2 text-gray-700 hover:text-blue-600 transition-colors"
+                className={`relative p-2 rounded-full transition-all ${showCart ? 'bg-blue-100 text-blue-600' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'}`}
                 onClick={() => setShowCart(!showCart)}
               >
                 <FiShoppingCart className="w-6 h-6" />
                 {cartItemCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-bounce">
                     {cartItemCount}
                   </span>
                 )}
@@ -345,120 +346,169 @@ function Shop() {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((product) => (
-              <div key={product._id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                {/* Product Image */}
-                <div className="relative h-48 overflow-hidden">
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    navigation={{
-                      nextEl: `.next-${product._id}`,
-                      prevEl: `.prev-${product._id}`,
-                    }}
-                    pagination={{ clickable: true }}
-                    spaceBetween={10}
-                    slidesPerView={1}
-                    className="h-full"
-                  >
-                    {product.images.map((image, index) => (
-                      <SwiperSlide key={index}>
-                        <img
-                          src={`${BASE_URL}${image}`}
-                          alt={`${product.title} ${index + 1}`}
-                          onClick={() => openImageModal(product.images, index)}
-                          className="w-full h-full object-cover cursor-pointer"
-                        />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                  <button className={`absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/80 text-gray-800 rounded-full p-1 z-10 prev-${product._id}`}>
-                    <FiChevronLeft className="w-5 h-5" />
-                  </button>
-                  <button className={`absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/80 text-gray-800 rounded-full p-1 z-10 next-${product._id}`}>
-                    <FiChevronRight className="w-5 h-5" />
-                  </button>
-                </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        {filteredProducts.map((product) => (
+  <div 
+    key={product._id} 
+    className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 relative"
+  >
+    {/* Discount Badge */}
+    {product.discount > 0 && (
+      <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10 flex items-center">
+        <span className="animate-pulse">🔥</span>
+        <span className="ml-1">{product.discount}% OFF</span>
+      </div>
+    )}
 
-                {/* Product Details */}
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1">{product.title}</h3>
-                  <p className="text-gray-600 text-sm mb-2 line-clamp-2">{product.description}</p>
-                  <p className="text-lg font-bold text-blue-600 mb-3">RWF {product.price}</p>
-                  
-                  {isInCart(product._id) ? (
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center border border-gray-300 rounded-md">
-                        <button 
-                          onClick={() => handleUpdateQuantity(product._id, getCartQuantity(product._id) - 1)}
-                          disabled={getCartQuantity(product._id) <= 1}
-                          className="px-3 py-1 text-gray-600 hover:bg-gray-100 disabled:opacity-50"
-                        >
-                          <FiMinus className="w-4 h-4" />
-                        </button>
-                        <span className="px-3 py-1 text-gray-800">{getCartQuantity(product._id)}</span>
-                        <button 
-                          onClick={() => handleUpdateQuantity(product._id, getCartQuantity(product._id) + 1)}
-                          className="px-3 py-1 text-gray-600 hover:bg-gray-100"
-                        >
-                          <FiPlus className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <button 
-                      onClick={() => handleAddToCart(product._id)}
-                      className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-                    >
-                      Add to Cart
-                    </button>
-                  )}
-                </div>
-              </div>
-            ))
-          ) : (
-            <div className="col-span-full text-center py-12">
-              <div className="max-w-md mx-auto">
-                <FiSearch className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-xl font-medium text-gray-700 mb-2">No products found</h3>
-                <p className="text-gray-500">Try adjusting your search or filter to find what you're looking for.</p>
-              </div>
-            </div>
-          )}
+    {/* Product Image */}
+    <div className="relative h-48 overflow-hidden group">
+      <Swiper
+        modules={[Navigation, Pagination]}
+        navigation={{
+          nextEl: `.next-${product._id}`,
+          prevEl: `.prev-${product._id}`,
+        }}
+        pagination={{ clickable: true }}
+        spaceBetween={10}
+        slidesPerView={1}
+        className="h-full"
+      >
+        {product.images.map((image, index) => (
+          <SwiperSlide key={index}>
+            <img
+              src={`${BASE_URL}${image}`}
+              alt={`${product.title} ${index + 1}`}
+              onClick={() => openImageModal(product.images, index)}
+              className="w-full h-full object-cover cursor-pointer transition-transform duration-500 group-hover:scale-110"
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <button className={`absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/80 text-gray-800 rounded-full p-1 z-10 prev-${product._id} opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md hover:bg-white`}>
+        <FiChevronLeft className="w-5 h-5" />
+      </button>
+      <button className={`absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/80 text-gray-800 rounded-full p-1 z-10 next-${product._id} opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md hover:bg-white`}>
+        <FiChevronRight className="w-5 h-5" />
+      </button>
+    </div>
+
+    {/* Product Details */}
+    <div className="p-4">
+      <div className="flex justify-between items-start mb-1">
+        <h3 className="text-lg font-semibold text-gray-800 truncate flex-1">{product.title}</h3>
+        {product.stock <= 10 && product.stock > 0 && (
+          <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full ml-2">
+            Only {product.stock} left
+          </span>
+        )}
+      </div>
+      
+      <p className="text-gray-600 text-sm mb-3 line-clamp-2 h-10">{product.description}</p>
+      
+      {/* Price Section */}
+      <div className="mb-4">
+        {product.discount > 0 ? (
+          <div className="flex items-center">
+            <span className="text-xl font-bold text-blue-600">
+              RWF {(product.price * (1 - product.discount/100)).toFixed(2)}
+            </span>
+            <span className="ml-2 text-sm text-gray-500 line-through">
+              RWF {product.price}
+            </span>
+            <span className="ml-2 text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded">
+              Save {product.discount}%
+            </span>
+          </div>
+        ) : (
+          <span className="text-xl font-bold text-blue-600">
+            RWF {product.price}
+          </span>
+        )}
+      </div>
+      
+      {/* Add to Cart Section */}
+      {isInCart(product._id) ? (
+        <div className="flex items-center justify-between">
+          <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+            <button 
+              onClick={() => handleUpdateQuantity(product._id, getCartQuantity(product._id) - 1)}
+              disabled={getCartQuantity(product._id) <= 1}
+              className="px-3 py-1 text-gray-600 hover:bg-gray-100 disabled:opacity-50 transition-colors"
+            >
+              <FiMinus className="w-4 h-4" />
+            </button>
+            <span className="px-3 py-1 text-gray-800 font-medium">{getCartQuantity(product._id)}</span>
+            <button 
+              onClick={() => handleUpdateQuantity(product._id, getCartQuantity(product._id) + 1)}
+              className="px-3 py-1 text-gray-600 hover:bg-gray-100 transition-colors"
+            >
+              <FiPlus className="w-4 h-4" />
+            </button>
+          </div>
+          <button
+            onClick={() => handleRemoveFromCart(product._id)}
+            className="text-red-500 hover:text-red-700 transition-colors"
+          >
+            <FiX className="w-5 h-5" />
+          </button>
         </div>
+      ) : (
+        <button 
+          onClick={() => handleAddToCart(product._id)}
+          disabled={product.stock === 0}
+          className={`w-full py-2 rounded-lg transition-all transform hover:-translate-y-0.5 shadow-md hover:shadow-lg flex items-center justify-center gap-2 ${
+            product.stock === 0 
+              ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+              : 'bg-blue-600 text-white hover:bg-blue-700'
+          }`}
+        >
+          <FiShoppingCart className="w-4 h-4" />
+          {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+        </button>
+      )}
+    </div>
+  </div>
+))
+}</div>
       </main>
 
       {/* Shopping Cart Sidebar */}
       {showCart && (
         <div className="fixed inset-0 z-50 overflow-hidden">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setShowCart(false)}></div>
+          <div 
+            className="absolute inset-0 bg-black/50 transition-opacity duration-300"
+            onClick={() => setShowCart(false)}
+          ></div>
           <div className="absolute inset-y-0 right-0 max-w-full flex">
-            <div className="relative w-screen max-w-md">
+            <div className={`relative w-screen max-w-md transform transition-transform duration-300 ${showCart ? 'translate-x-0' : 'translate-x-full'}`}>
               <div className="h-full flex flex-col bg-white shadow-xl">
                 <div className="flex-1 overflow-y-auto">
-                  <div className="px-4 py-6 sm:px-6 border-b">
+                  <div className="px-6 py-6 border-b border-gray-200">
                     <div className="flex items-center justify-between">
-                      <h2 className="text-lg font-medium text-gray-900">Shopping Cart</h2>
+                      <h2 className="text-xl font-bold text-gray-900">Shopping Cart</h2>
                       <button 
                         onClick={() => setShowCart(false)}
-                        className="text-gray-400 hover:text-gray-500"
+                        className="text-gray-400 hover:text-gray-500 transition-colors"
                       >
                         <FiX className="w-6 h-6" />
                       </button>
                     </div>
+                    <p className="text-sm text-gray-500 mt-1">{cart.items.length} item{cart.items.length !== 1 ? 's' : ''} in cart</p>
                   </div>
 
                   {cart.items.length > 0 ? (
                     <div className="divide-y divide-gray-200">
                       {cart.items.map((item) => (
-                        <div key={item.product} className="px-4 py-4 sm:px-6">
+                        <div key={item.product} className="px-6 py-4">
                           <div className="flex">
-                            <div className="flex-shrink-0 h-20 w-20 rounded-md overflow-hidden">
+                            <div 
+                              className="flex-shrink-0 h-20 w-20 rounded-lg overflow-hidden cursor-pointer"
+                              onClick={() => openImageModal(item.images, 0)}
+                            >
                               <img
                                 src={`${BASE_URL}${item.images[0]}`}
                                 alt={item.title}
-                                className="h-full w-full object-cover"
+                                className="h-full w-full object-cover transition-transform duration-300 hover:scale-110"
                               />
                             </div>
 
@@ -469,18 +519,18 @@ function Shop() {
                               </div>
 
                               <div className="flex-1 flex items-end justify-between">
-                                <div className="flex items-center border border-gray-300 rounded-md">
+                                <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
                                   <button 
                                     onClick={() => handleUpdateQuantity(item.product, item.quantity - 1)}
                                     disabled={item.quantity <= 1}
-                                    className="px-2 py-1 text-gray-600 hover:bg-gray-100 disabled:opacity-50"
+                                    className="px-3 py-1 text-gray-600 hover:bg-gray-100 disabled:opacity-50 transition-colors"
                                   >
                                     <FiMinus className="w-4 h-4" />
                                   </button>
-                                  <span className="px-2 py-1 text-gray-800">{item.quantity}</span>
+                                  <span className="px-3 py-1 text-gray-800 font-medium">{item.quantity}</span>
                                   <button 
                                     onClick={() => handleUpdateQuantity(item.product, item.quantity + 1)}
-                                    className="px-2 py-1 text-gray-600 hover:bg-gray-100"
+                                    className="px-3 py-1 text-gray-600 hover:bg-gray-100 transition-colors"
                                   >
                                     <FiPlus className="w-4 h-4" />
                                   </button>
@@ -488,7 +538,7 @@ function Shop() {
 
                                 <button 
                                   onClick={() => handleRemoveFromCart(item.product)}
-                                  className="text-red-500 hover:text-red-700"
+                                  className="text-red-500 hover:text-red-700 transition-colors"
                                 >
                                   <FiX className="w-5 h-5" />
                                 </button>
@@ -499,28 +549,37 @@ function Shop() {
                       ))}
                     </div>
                   ) : (
-                    <div className="px-4 py-12 text-center">
-                      <FiShoppingCart className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                    <div className="px-6 py-12 text-center">
+                      <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <FiShoppingCart className="w-8 h-8 text-blue-400" />
+                      </div>
                       <h3 className="text-lg font-medium text-gray-900 mb-1">Your cart is empty</h3>
-                      <p className="text-gray-500">Start shopping to add items to your cart</p>
+                      <p className="text-gray-500 mb-4">Start shopping to add items to your cart</p>
+                      <button
+                        onClick={() => setShowCart(false)}
+                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                      >
+                        Continue Shopping
+                      </button>
                     </div>
                   )}
                 </div>
 
                 {cart.items.length > 0 && (
-                  <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-                    <div className="flex justify-between text-base font-medium text-gray-900 mb-4">
+                  <div className="border-t border-gray-200 px-6 py-6">
+                    <div className="flex justify-between text-lg font-bold text-gray-900 mb-4">
                       <p>Subtotal</p>
                       <p>RWF {totalAmount}</p>
                     </div>
-                    <p className="mt-0.5 text-sm text-gray-500 mb-6">
+                    <p className="text-sm text-gray-500 mb-6">
                       Shipping and taxes calculated at checkout.
                     </p>
                     <button
                       onClick={handleCreateOrder}
-                      className="w-full bg-blue-600 border border-transparent rounded-md py-3 px-4 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                      className="w-full bg-blue-600 border border-transparent rounded-lg py-3 px-4 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all transform hover:-translate-y-0.5 shadow-md hover:shadow-lg flex items-center justify-center gap-2"
                     >
-                      Checkout
+                      <FiMapPin className="w-5 h-5" />
+                      Proceed to Checkout
                     </button>
                   </div>
                 )}
@@ -533,53 +592,60 @@ function Shop() {
       {/* Orders Sidebar */}
       {showOrders && (
         <div className="fixed inset-0 z-50 overflow-hidden">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setShowOrders(false)}></div>
+          <div 
+            className="absolute inset-0 bg-black/50 transition-opacity duration-300"
+            onClick={() => setShowOrders(false)}
+          ></div>
           <div className="absolute inset-y-0 right-0 max-w-full flex">
-            <div className="relative w-screen max-w-md">
+            <div className={`relative w-screen max-w-md transform transition-transform duration-300 ${showOrders ? 'translate-x-0' : 'translate-x-full'}`}>
               <div className="h-full flex flex-col bg-white shadow-xl">
                 <div className="flex-1 overflow-y-auto">
-                  <div className="px-4 py-6 sm:px-6 border-b">
+                  <div className="px-6 py-6 border-b border-gray-200">
                     <div className="flex items-center justify-between">
-                      <h2 className="text-lg font-medium text-gray-900">My Orders</h2>
+                      <h2 className="text-xl font-bold text-gray-900">My Orders</h2>
                       <button 
                         onClick={() => setShowOrders(false)}
-                        className="text-gray-400 hover:text-gray-500"
+                        className="text-gray-400 hover:text-gray-500 transition-colors"
                       >
                         <FiX className="w-6 h-6" />
                       </button>
                     </div>
+                    <p className="text-sm text-gray-500 mt-1">{orders.length} order{orders.length !== 1 ? 's' : ''} placed</p>
                   </div>
 
                   {orders.length > 0 ? (
                     <div className="divide-y divide-gray-200">
                       {orders.map((order) => (
-                        <div key={order._id} className="px-4 py-6 sm:px-6">
+                        <div key={order._id} className="px-6 py-6">
                           <div className="flex justify-between items-start">
                             <div>
-                              <h3 className="text-base font-medium text-gray-900">
+                              <h3 className="text-base font-bold text-gray-900">
                                 Order #{order._id.slice(-6).toUpperCase()}
                               </h3>
                               <p className="mt-1 text-sm text-gray-500">
                                 {new Date(order.createdAt).toLocaleString()}
                               </p>
                             </div>
-                            <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                            <span className={`px-3 py-1 text-xs font-bold rounded-full ${
                               order.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
                               order.status === 'delivered' ? 'bg-green-100 text-green-800' :
                               'bg-blue-100 text-blue-800'
                             }`}>
-                              {order.status}
+                              {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
                             </span>
                           </div>
 
                           <div className="mt-4 space-y-4">
                             {order.items.map((item, index) => (
                               <div key={`${item.product}-${index}`} className="flex">
-                                <div className="flex-shrink-0 h-16 w-16 rounded-md overflow-hidden">
+                                <div 
+                                  className="flex-shrink-0 h-16 w-16 rounded-lg overflow-hidden cursor-pointer"
+                                  onClick={() => openImageModal(item.images, 0)}
+                                >
                                   <img
                                     src={`${BASE_URL}${item.images[0]}`}
                                     alt={item.title}
-                                    className="h-full w-full object-cover"
+                                    className="h-full w-full object-cover transition-transform duration-300 hover:scale-110"
                                   />
                                 </div>
 
@@ -594,23 +660,23 @@ function Shop() {
                           </div>
 
                           <div className="mt-4 pt-4 border-t border-gray-200">
-                            <div className="flex justify-between text-sm text-gray-600">
+                            <div className="flex justify-between text-sm font-medium text-gray-600">
                               <p>Total</p>
-                              <p className="font-medium">RWF {order.totalAmount.toFixed(2)}</p>
+                              <p className="text-blue-600">RWF {order.totalAmount.toFixed(2)}</p>
                             </div>
-                            <div className="mt-2 flex items-center text-sm text-gray-600">
-                              <FiMapPin className="flex-shrink-0 mr-1.5 h-4 w-4 text-gray-500" />
+                            <div className="mt-3 flex items-center text-sm text-gray-600">
+                              <FiMapPin className="flex-shrink-0 mr-2 h-4 w-4 text-blue-500" />
                               <a 
                                 href={order.deliveryLocation} 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="text-blue-600 hover:underline"
+                                className="text-blue-600 hover:underline truncate"
                               >
                                 View delivery location
                               </a>
                             </div>
-                            <div className="mt-1 flex items-center text-sm text-gray-600">
-                              <FiPhone className="flex-shrink-0 mr-1.5 h-4 w-4 text-gray-500" />
+                            <div className="mt-2 flex items-center text-sm text-gray-600">
+                              <FiPhone className="flex-shrink-0 mr-2 h-4 w-4 text-blue-500" />
                               <span>Contact: {order.phoneNumber}</span>
                             </div>
                           </div>
@@ -618,12 +684,18 @@ function Shop() {
                       ))}
                     </div>
                   ) : (
-                    <div className="px-4 py-12 text-center">
-                      <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <FiShoppingCart className="w-6 h-6 text-gray-400" />
+                    <div className="px-6 py-12 text-center">
+                      <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <FiShoppingCart className="w-8 h-8 text-blue-400" />
                       </div>
                       <h3 className="text-lg font-medium text-gray-900 mb-1">No orders yet</h3>
-                      <p className="text-gray-500">Your completed orders will appear here</p>
+                      <p className="text-gray-500 mb-4">Your completed orders will appear here</p>
+                      <button
+                        onClick={() => setShowOrders(false)}
+                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                      >
+                        Continue Shopping
+                      </button>
                     </div>
                   )}
                 </div>
@@ -636,43 +708,46 @@ function Shop() {
       {/* Location Modal */}
       {showLocationModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setShowLocationModal(false)}></div>
-          <div className="relative bg-white rounded-lg shadow-xl max-w-md w-full p-6">
+          <div 
+            className="absolute inset-0 bg-black/50 transition-opacity duration-300"
+            onClick={() => setShowLocationModal(false)}
+          ></div>
+          <div className="relative bg-white rounded-xl shadow-2xl max-w-md w-full p-6 transform transition-all duration-300 scale-100">
             <button 
               onClick={() => setShowLocationModal(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-500"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 transition-colors"
             >
               <FiX className="w-6 h-6" />
             </button>
 
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Delivery Information</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-6">Delivery Information</h3>
             
             <div className="mb-6">
-              <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
                 Google Maps Location Link
               </label>
               <div className="relative">
-                <FiMapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <FiMapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-500" />
                 <input
                   type="text"
                   id="location"
                   placeholder="Paste your Google Maps link here"
                   value={deliveryLocation}
                   onChange={(e) => setDeliveryLocation(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 outline-none"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all shadow-sm"
                 />
               </div>
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-2 text-xs text-gray-500">
                 Accepted formats: google.com/maps, maps.google.com, maps.app.goo.gl, goo.gl/maps
               </p>
             </div>
 
             <div className="mb-6">
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
                 Phone Number
               </label>
               <div className="relative">
-                <FiPhone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <FiPhone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-500" />
                 <input
                   type="tel"
                   id="phone"
@@ -680,15 +755,15 @@ function Shop() {
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   required
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 outline-none"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all shadow-sm"
                 />
               </div>
             </div>
 
-            <div className="bg-blue-50 p-4 rounded-md mb-6">
-              <h4 className="text-sm font-medium text-blue-800 mb-2">How to get your Google Maps link:</h4>
-              <ol className="text-sm text-blue-700 list-decimal list-inside space-y-1">
-                <li>Go to <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Google Maps</a></li>
+            <div className="bg-blue-50 p-4 rounded-lg mb-6">
+              <h4 className="text-sm font-bold text-blue-800 mb-2">How to get your Google Maps link:</h4>
+              <ol className="text-sm text-blue-700 list-decimal list-inside space-y-2">
+                <li>Go to <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline font-medium">Google Maps</a></li>
                 <li>Search for your delivery location</li>
                 <li>Click "Share" → "Copy link"</li>
                 <li>Paste it in the field above</li>
@@ -698,13 +773,13 @@ function Shop() {
             <div className="flex justify-end gap-3">
               <button
                 onClick={() => setShowLocationModal(false)}
-                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                className="px-5 py-2.5 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={confirmOrderWithLocation}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                className="px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all transform hover:-translate-y-0.5 shadow-md hover:shadow-lg"
               >
                 Confirm Order
               </button>
@@ -715,11 +790,14 @@ function Shop() {
 
       {/* Image Modal */}
       {showImageModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90" onClick={closeImageModal}>
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 transition-opacity duration-300"
+          onClick={closeImageModal}
+        >
           <div className="relative w-full max-w-4xl">
             <button 
               onClick={closeImageModal}
-              className="absolute -top-10 right-0 text-white hover:text-gray-300 z-10"
+              className="absolute -top-12 right-0 text-white hover:text-gray-300 z-10 transition-colors"
             >
               <FiX className="w-8 h-8" />
             </button>
@@ -735,11 +813,13 @@ function Shop() {
             >
               {currentProductImages.map((image, index) => (
                 <SwiperSlide key={index}>
-                  <img
-                    src={`${BASE_URL}${image}`}
-                    alt={`Product image ${index + 1}`}
-                    className="w-full h-auto max-h-[80vh] object-contain"
-                  />
+                  <div className="flex items-center justify-center h-full">
+                    <img
+                      src={`${BASE_URL}${image}`}
+                      alt={`Product image ${index + 1}`}
+                      className="max-w-full max-h-[80vh] object-contain"
+                    />
+                  </div>
                 </SwiperSlide>
               ))}
             </Swiper>
