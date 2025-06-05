@@ -346,7 +346,7 @@ function Shop() {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 pt-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {filteredProducts.map((product) => (
   <div 
     key={product._id} 
@@ -376,9 +376,9 @@ function Shop() {
         {product.images.map((image, index) => (
           <SwiperSlide key={index}>
             <img
-              src={`${BASE_URL}${image}`}
+              src={`${image.url}`}
               alt={`${product.title} ${index + 1}`}
-              onClick={() => openImageModal(product.images, index)}
+              onClick={() => openImageModal(product.images.url, index)}
               className="w-full h-full object-cover cursor-pointer transition-transform duration-500 group-hover:scale-110"
             />
           </SwiperSlide>
@@ -643,7 +643,7 @@ function Shop() {
                                   onClick={() => openImageModal(item.images, 0)}
                                 >
                                   <img
-                                    src={`${BASE_URL}${item.images[0]}`}
+                                    src={`${item.images[0].url}`}
                                     alt={item.title}
                                     className="h-full w-full object-cover transition-transform duration-300 hover:scale-110"
                                   />
