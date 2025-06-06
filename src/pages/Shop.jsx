@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, Zoom } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -378,7 +378,7 @@ function Shop() {
             <img
               src={`${image.url}`}
               alt={`${product.title} ${index + 1}`}
-              onClick={() => openImageModal(product.images.url, index)}
+              onClick={() => openImageModal(product.images, index)}
               className="w-full h-full object-cover cursor-pointer transition-transform duration-500 group-hover:scale-110"
             />
           </SwiperSlide>
@@ -503,7 +503,7 @@ function Shop() {
                           <div className="flex">
                             <div 
                               className="flex-shrink-0 h-20 w-20 rounded-lg overflow-hidden cursor-pointer"
-                              onClick={() => openImageModal(item.images.url, 0)}
+                              onClick={() => openImageModal(item.images, 0)}
                             >
                               <img
                                 src={item.images?.[0].url}
