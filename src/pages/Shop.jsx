@@ -503,10 +503,10 @@ function Shop() {
                           <div className="flex">
                             <div 
                               className="flex-shrink-0 h-20 w-20 rounded-lg overflow-hidden cursor-pointer"
-                              onClick={() => openImageModal(item.images, 0)}
+                              onClick={() => openImageModal(item.images.url, 0)}
                             >
                               <img
-                                src={`${BASE_URL}${item.images[0]}`}
+                                src={item.images?.[0].url}
                                 alt={item.title}
                                 className="h-full w-full object-cover transition-transform duration-300 hover:scale-110"
                               />
@@ -788,44 +788,108 @@ function Shop() {
         </div>
       )}
 
-      {/* Image Modal */}
-      {showImageModal && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 transition-opacity duration-300"
-          onClick={closeImageModal}
+    {/* Image Modal */}
+{showImageModal && (
+  <div 
+    className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 transition-opacity duration-300"
+    onClick={closeImageModal}
+  >
+    <div className="relative w-full max-w-6xl h-full max-h-[90vh]">
+      {/* Close Button */}
+      <button 
+        onClick={closeImageModal}
+        className="absolute -top-12 right-0 text-white hover:text-gray-300 z-10 transition-colors"
+      >
+        <FiX className="w-8 h-8" />
+      </button>
+      
+      {/* Main Image Carousel */}
+      <Swiper
+        modules={[Navigation, Pagination, Zoom]}
+        navigation={{
+          nextEl: '.image-modal-next',
+          prevEl: '.image-modal-prev',
+        }}
+        pagination={{
+          clickable: true,
+          renderBullet: (index, className) => {
+            return `<span class="${className} bg-white opacity-60 hover:opacity-100 transition-opacity"></span>`;
+          }
+        }}
+        zoom={true}
+        spaceBetween={20}
+        slidesPerView={1}
+        initialSlide={clickedImageIndex}
+        className="w-full h-full rounded-lg overflow-hidden"
+      >
+        {currentProductImages.map((image, index) => (
+          <SwiperSlide key={index} className="flex items-center justify-center">
+            <div className="swiper-zoom-container">
+              <img
+                src={image.url}
+                alt={`Product image ${index + 1}`}
+                className="max-w-full max-h-[80vh] object-contain cursor-zoom-in"
+                loading="lazy"
+              />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* Custom Navigation Arrows */}
+      <button className="image-modal-prev absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 text-gray-800 rounded-full p-2 shadow-lg hover:bg-white transition-all">
+        <FiChevronLeft className="w-6 h-6" />
+      </button>
+      <button className="image-modal-next absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 text-gray-800 rounded-full p-2 shadow-lg hover:bg-white transition-all">
+        <FiChevronRight className="w-6 h-6" />
+      </button>
+
+      {/* Thumbnail Navigation */}
+      <div className="mt-4 mx-auto max-w-md">
+        <Swiper
+          slidesPerView={5}
+          spaceBetween={10}
+          centeredSlides={true}
+          slideToClickedSlide={true}
+          className="thumbnail-swiper"
         >
-          <div className="relative w-full max-w-4xl">
-            <button 
-              onClick={closeImageModal}
-              className="absolute -top-12 right-0 text-white hover:text-gray-300 z-10 transition-colors"
+          {currentProductImages.map((image, index) => (
+            <SwiperSlide 
+              key={index} 
+              className="cursor-pointer opacity-60 hover:opacity-100 transition-opacity"
+              onClick={() => {
+                document.querySelector('.image-modal-prev').click();
+                document.querySelector('.image-modal-next').click();
+              }}
             >
-              <FiX className="w-8 h-8" />
-            </button>
-            
-            <Swiper
-              modules={[Navigation, Pagination]}
-              navigation
-              pagination={{ clickable: true }}
-              spaceBetween={10}
-              slidesPerView={1}
-              initialSlide={clickedImageIndex}
-              className="w-full h-full"
-            >
-              {currentProductImages.map((image, index) => (
-                <SwiperSlide key={index}>
-                  <div className="flex items-center justify-center h-full">
-                    <img
-                      src={`${BASE_URL}${image}`}
-                      alt={`Product image ${index + 1}`}
-                      className="max-w-full max-h-[80vh] object-contain"
-                    />
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-        </div>
-      )}
+              <img
+                src={image.url}
+                alt={`Thumbnail ${index + 1}`}
+                className="w-full h-16 object-cover rounded border border-gray-200"
+                loading="lazy"
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+
+      {/* Download Button */}
+      <div className="absolute bottom-4 right-4 z-10">
+        <a 
+          href={currentProductImages[clickedImageIndex]?.url} 
+          download
+          className="bg-white/90 text-gray-800 px-4 py-2 rounded-lg shadow-md hover:bg-white transition-all flex items-center gap-2"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+          </svg>
+          Download
+        </a>
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 }
