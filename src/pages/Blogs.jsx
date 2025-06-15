@@ -43,6 +43,14 @@ const Blogs = () => {
     document.body.style.overflow = 'auto';
   };
 
+  // Function to strip HTML tags for previews
+  const stripHtml = (html) => {
+    if (!html) return "";
+    const tmp = document.createElement("div");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+  };
+
   return (
     <div className="blogs-page">
       {/* Hero Section */}
@@ -100,7 +108,7 @@ const Blogs = () => {
 
                 <div className="blog-content">
                   <div className="blog-section">
-                    <p>{blog.content.substring(0, 150)}...</p>
+                    <p>{stripHtml(blog.content).substring(0, 150)}...</p>
                   </div>
 
                   <div className="blog-footer">
@@ -137,9 +145,10 @@ const Blogs = () => {
             </div>
 
             <div className="modal-body">
-              <div className="modal-section">
-                <p className="blog-full-content">{selectedBlog.content}</p>
-              </div>
+              <div 
+                className="modal-section blog-full-content"
+                dangerouslySetInnerHTML={{ __html: selectedBlog.content }} 
+              />
             </div>
           </div>
         </div>
