@@ -17,12 +17,14 @@ import Profile from "./pages/Profile";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import ProtectedRoute from "./components/ProtectedRoute";
 import FloatingContactButton from "./components/FloatingContactButton.jsx";
+import SEO from "./components/SEO.jsx";
 
 
 function App() {
   return (
     <AuthProvider>
       <Router>
+        <SEO/>
         <Navbar />
         <div style={{minHeight:"100vh"}} className="mt-20">
         <Routes>
