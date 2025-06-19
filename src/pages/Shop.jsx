@@ -282,7 +282,7 @@ function Shop() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
       {/* Header */}
-      <header className="bg-white shadow-md sticky top-0 z-50 transform transition-all duration-300 hover:shadow-xl">
+      <header className="bg-white shadow-md sticky top-0 z-20 transform transition-all duration-300 hover:shadow-xl">
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <h1 className="text-2xl font-bold text-gray-800 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400">
