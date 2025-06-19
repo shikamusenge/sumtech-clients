@@ -5,7 +5,6 @@ import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import Contacts from "./Contact";
 import Hero from "../components/Hero";
 import TopUpProducts from "./TopUP";
 
@@ -173,7 +172,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <Contacts/>
     </div>
   );
 };

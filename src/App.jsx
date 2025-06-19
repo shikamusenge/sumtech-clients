@@ -16,6 +16,7 @@ import SignUp from "./pages/SignUp";
 import Profile from "./pages/Profile";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import ProtectedRoute from "./components/ProtectedRoute";
+import FloatingContactButton from "./components/FloatingContactButton.jsx";
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
         </Routes>
         </div>
         <Footer />
+        <FloatingContactButton/>
       </Router>
     </AuthProvider>
   );

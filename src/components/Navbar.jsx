@@ -68,9 +68,7 @@ function Navbar() {
       <ul className={`nav-links ${isMenuOpen ? 'mobile-menu-open' : ''}`}>
         <li><NavLink to="/" exact activeClassName="active" onClick={() => setIsMenuOpen(false)}>Home</NavLink></li>
         <li><NavLink to="/#products" activeClassName="active" onClick={() => setIsMenuOpen(false)}>Products</NavLink></li>
-        <li><NavLink to="/shop" activeClassName="active" onClick={() => setIsMenuOpen(false)}>Shop</NavLink></li>
-        <li><NavLink to="/contact" activeClassName="active" onClick={() => setIsMenuOpen(false)}>Contact</NavLink></li>
-        
+        <li><NavLink to="/shop" activeClassName="active" onClick={() => setIsMenuOpen(false)}>Shop</NavLink></li>        
         {/* Explore Dropdown */}
         <li 
           className="dropdown-container"
