@@ -10,7 +10,6 @@ import Portfolio from "./pages/Portfolio";
 import Shop from "./pages/Shop";
 import Blogs from "./pages/Blogs";
 import NotFound from "./pages/NotFound";
-import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Profile from "./pages/Profile";
@@ -34,7 +33,6 @@ function App() {
           <Route path="/careers" element={<Careers />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/shop" element={<Shop />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
