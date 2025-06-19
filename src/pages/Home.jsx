@@ -79,7 +79,7 @@ const Home = () => {
      
 
      <Hero/>
-     <TopUpProducts/>
+     {/* <TopUpProducts/> */}
 
       {/* Stats Section */}
       <section className="py-12 bg-white dark:bg-gray-900">
